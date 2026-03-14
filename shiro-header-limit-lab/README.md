@@ -33,5 +33,5 @@ docker run -d –-name shiro-lab -p 0.0.0.0:8080:8080 shiro-lab
 # 三、wp
 请关注凌曦安全公众号，并回复shirolab-wp
 
-< img align='right' src="[https://github.com/Syst1msec/Syst1msec/raw/main/TeamLogo.jpg"](https://github.com/Syst1msec/Syst1msec/raw/main/TeamLogo.jpg") width="350">
+<img src="https://github.com/Syst1msec/Syst1msec/raw/main/TeamLogo.jpg" width="350">
 
