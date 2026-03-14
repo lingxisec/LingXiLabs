@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>凌曦安全 - 统一身份认证平台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:linear-gradient(135deg,#0c1426 0%,#1a2a4a 50%,#0d1b2e 100%);min-height:100vh;display:flex;flex-direction:column;color:#e0e6ed}
+.top-bar{background:rgba(0,0,0,.3);padding:10px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-icon{width:32px;height:32px;background:linear-gradient(135deg,#4facfe,#00f2fe);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;color:#fff}
+.brand-name{font-size:18px;font-weight:600;color:#fff}
+.brand-sub{font-size:12px;color:#7a8ba8;margin-left:10px}
+.top-links{display:flex;gap:20px;align-items:center}
+.top-links a{color:#7a8ba8;text-decoration:none;font-size:13px;transition:color .2s}
+.top-links a:hover{color:#4facfe}
+.btn-course{background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s}
+.btn-course:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(245,87,108,.4);color:#fff}
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.container{display:flex;gap:60px;align-items:center;max-width:1000px;width:100%}
+.left-info{flex:1}
+.left-info h1{font-size:32px;font-weight:700;margin-bottom:16px;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.left-info p{color:#7a8ba8;line-height:1.8;font-size:14px;margin-bottom:12px}
+.features{display:flex;gap:20px;margin-top:30px}
+.feature-item{text-align:center;padding:16px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(255,255,255,.06);flex:1}
+.feature-item .num{font-size:24px;font-weight:700;color:#4facfe}
+.feature-item .label{font-size:12px;color:#7a8ba8;margin-top:4px}
+.login-card{width:380px;background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border-radius:16px;border:1px solid rgba(255,255,255,.1);padding:40px 36px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.login-card h2{font-size:20px;font-weight:600;margin-bottom:6px;color:#fff}
+.login-card .subtitle{font-size:13px;color:#7a8ba8;margin-bottom:30px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;color:#94a3b8;margin-bottom:6px}
+.form-group input[type=text],.form-group input[type=password]{width:100%;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:14px;outline:none;transition:border-color .2s}
+.form-group input:focus{border-color:#4facfe}
+.remember-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.remember-row label{display:flex;align-items:center;gap:6px;font-size:13px;color:#94a3b8;cursor:pointer}
+.remember-row input[type=checkbox]{accent-color:#4facfe}
+.btn-login{width:100%;padding:12px;background:linear-gradient(135deg,#4facfe,#00f2fe);border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-login:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(79,172,254,.4)}
+.btn-login:active{transform:translateY(0)}
+.msg{margin-top:16px;padding:10px 14px;border-radius:8px;font-size:13px;display:none}
+.msg.ok{display:block;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+.msg.err{display:block;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.footer{text-align:center;padding:20px;color:#4a5568;font-size:12px;border-top:1px solid rgba(255,255,255,.05)}
+.footer a{color:#4facfe;text-decoration:none}
+.ad-banner{background:linear-gradient(90deg,rgba(79,172,254,.1),rgba(0,242,254,.1));border:1px solid rgba(79,172,254,.15);border-radius:10px;padding:12px 20px;margin-top:30px;display:flex;align-items:center;justify-content:space-between}
+.ad-banner span{font-size:13px;color:#94a3b8}
+.ad-banner a{color:#4facfe;text-decoration:none;font-weight:500;font-size:13px}
+@media(max-width:768px){.container{flex-direction:column;gap:30px}.left-info{text-align:center}.login-card{width:100%}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="brand">
+    <div class="brand-icon">LX</div>
+    <span class="brand-name">凌曦安全</span>
+    <span class="brand-sub">LingXi Security</span>
+  </div>
+  <div class="top-links">
+    <a href="https://lingxisec.com" target="_blank">官网</a>
+    <a href="https://www.yuque.com/syst1m-/blog/lc3k6elv0zqhdal3" target="_blank" class="btn-course">📖 课程介绍</a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="container">
+    <div class="left-info">
+      <h1>统一身份认证平台</h1>
+      <p>为企业提供安全可靠的身份认证与访问管理服务，基于 Apache Shiro 构建的集中化身份认证系统，支持单点登录、记住我、细粒度权限控制。</p>
+      <div class="features">
+        <div class="feature-item"><div class="num">SSO</div><div class="label">单点登录</div></div>
+        <div class="feature-item"><div class="num">RBAC</div><div class="label">角色权限</div></div>
+        <div class="feature-item"><div class="num">7×24</div><div class="label">稳定运行</div></div>
+      </div>
+      <div class="ad-banner">
+        <span>🔒 凌曦安全 — 专注企业安全攻防实战培训</span>
+        <a href="https://lingxisec.com" target="_blank">了解更多 →</a>
+      </div>
+    </div>
+    <div class="login-card">
+      <h2>用户登录</h2>
+      <div class="subtitle">请使用您的账号登录系统</div>
+      <div class="form-group">
+        <label>用户名</label>
+        <input type="text" id="username" placeholder="请输入用户名" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="password" id="password" placeholder="请输入密码">
+      </div>
+      <div class="remember-row">
+        <label><input type="checkbox" id="rememberMe"> 记住我</label>
+      </div>
+      <button class="btn-login" onclick="doLogin()">登 录</button>
+      <div id="msg"></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Copyright © 2024 <a href="https://lingxisec.com" target="_blank">凌曦安全 lingxisec.com</a> | 统一身份认证平台 v3.2.1
+</div>
+
+<script>
+function doLogin(){
+  var u=document.getElementById('username').value;
+  var p=document.getElementById('password').value;
+  var r=document.getElementById('rememberMe').checked;
+  var msg=document.getElementById('msg');
+  if(!u||!p){msg.className='msg err';msg.textContent='请输入用户名和密码';return}
+  var fd=new URLSearchParams();
+  fd.append('username',u);fd.append('password',p);fd.append('rememberMe',r);
+  fetch('/login',{method:'POST',body:fd}).then(function(r){return r.text()}).then(function(t){
+    if(t.indexOf('OK')!==-1){msg.className='msg ok';msg.textContent='登录成功，欢迎回来'}
+    else{msg.className='msg err';msg.textContent='用户名或密码错误'}
+  }).catch(function(e){msg.className='msg err';msg.textContent='系统繁忙，请稍后重试'})
+}
+document.getElementById('password').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
+</script>
+</body>
+</html>
